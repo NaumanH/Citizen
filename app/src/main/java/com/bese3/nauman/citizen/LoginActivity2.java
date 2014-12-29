@@ -46,8 +46,6 @@ public class LoginActivity2 extends Activity {
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
     private CheckBox rememberMeCheckBox;
     private TextView forgotPasswordTextView;
     private Button loginButton;
