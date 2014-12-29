@@ -15,6 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+<<<<<<< HEAD
+=======
+import android.widget.CompoundButton;
+>>>>>>> origin/master
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -24,7 +28,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import com.bese3.nauman.citizen.data.User;
+<<<<<<< HEAD
 import android.data.service.UserService;
+=======
+import com.bese3.nauman.citizen.data.service.UserService;
+>>>>>>> origin/master
 
 
 
