@@ -16,14 +16,14 @@
         <ImageButton
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:id="@+id/imageButton"
+            android:id="@+id/ViewEmergency"
             android:src="@drawable/view"
             android:background="@android:color/transparent"
             android:adjustViewBounds="true"
             android:padding="10dp"
             android:scaleType="fitCenter"
             android:paddingBottom="20dp"
-            android:layout_alignTop="@+id/imageButton2"
+            android:layout_alignTop="@+id/ReportEmergency"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:clickable="true" />
@@ -31,7 +31,7 @@
         <ImageButton
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:id="@+id/imageButton2"
+            android:id="@+id/ReportEmergency"
             android:layout_marginTop="50dp"
             android:src="@drawable/gen_report"
             android:background="@android:color/transparent"
@@ -54,9 +54,9 @@
             android:textSize="25dp"
             android:padding="10dp"
             android:scaleType="fitCenter"
-            android:layout_below="@+id/imageButton"
-            android:layout_alignRight="@+id/imageButton"
-            android:layout_alignEnd="@+id/imageButton" />
+            android:layout_below="@+id/ViewEmergency"
+            android:layout_alignRight="@+id/ViewEmergency"
+            android:layout_alignEnd="@+id/ViewEmergency" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -68,14 +68,14 @@
             android:textSize="22dp"
             android:padding="10dp"
             android:scaleType="fitCenter"
-            android:layout_below="@+id/imageButton2"
-            android:layout_alignLeft="@+id/imageButton2"
-            android:layout_alignStart="@+id/imageButton2" />
+            android:layout_below="@+id/ReportEmergency"
+            android:layout_alignLeft="@+id/ReportEmergency"
+            android:layout_alignStart="@+id/ReportEmergency" />
 
         <ImageButton
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:id="@+id/imageButton3"
+            android:id="@+id/DeleteEmergency"
             android:src="@drawable/edit_report"
             android:background="@android:color/transparent"
             android:adjustViewBounds="true"
@@ -90,8 +90,8 @@
         <ImageButton
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:id="@+id/imageButton4"
-            android:src="@drawable/citizen_settings"
+            android:id="@+id/logoutbtn"
+            android:src="@drawable/logout"
             android:background="@android:color/transparent"
             android:adjustViewBounds="true"
             android:padding="10dp"
@@ -112,25 +112,26 @@
             android:textSize="21dp"
             android:padding="10dp"
             android:scaleType="fitCenter"
-            android:layout_below="@+id/imageButton3"
+            android:layout_below="@+id/DeleteEmergency"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/imageButton3"
-            android:layout_alignEnd="@+id/imageButton3" />
+            android:layout_alignRight="@+id/DeleteEmergency"
+            android:layout_alignEnd="@+id/DeleteEmergency" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="SETTINGS"
+            android:text="LOGOUT"
             android:id="@+id/textView5"
             android:textStyle="bold"
             android:textSize="25dp"
             android:padding="10dp"
+            android:layout_marginRight="15dp"
             android:scaleType="fitCenter"
-            android:layout_below="@+id/imageButton4"
-            android:layout_alignLeft="@+id/imageButton4"
-            android:layout_alignStart="@+id/imageButton4" />
+            android:layout_below="@+id/logoutbtn"
+            android:layout_alignRight="@+id/logoutbtn"
+            android:layout_alignEnd="@+id/logoutbtn" />
 
 
     </RelativeLayout>

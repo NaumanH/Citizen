@@ -1,30 +1,14 @@
 package com.bese3.nauman.citizen;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
+
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -32,12 +16,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bese3.nauman.citizen.data.User;
-import com.bese3.nauman.citizen.data.service.UserService;
+import com.bese3.nauman.citizen.Unused.User;
+import com.bese3.nauman.citizen.Unused.UserService;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.Request.Method;
+import com.bese3.nauman.citizen.data.AppController;
+import com.bese3.nauman.citizen.data.CustomRequest;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * A login screen that offers login via email/password.
@@ -52,16 +46,112 @@ public class LoginActivity2 extends Activity {
     private Button signUpButton;
     private ProgressDialog progressDialog;
 
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+    public void vollry() {
+        CustomRequest jsonObjReq = new CustomRequest(Method.POST,
+                "http://citizenemergency.web44.net/response.php", null,//ip
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+
+
+                            int t=response.getInt("query");
+                            String s=response.getString("data");
+                            pref=getSharedPreferences("MyPrefs",MODE_PRIVATE);
+                            editor=pref.edit();
+                            editor.putString("userid",s);
+                            editor.commit();
+                            if (s != "null")
+                            {
+
+                                Toast.makeText(LoginActivity2.this,
+                                        "Login Successfull",
+                                        Toast.LENGTH_LONG).show();
+
+                                goToMainMenuActivity();
+                            }
+                            else
+                            {
+                                Toast.makeText(LoginActivity2.this,
+                                        "Invalid Username Or Password",
+                                        Toast.LENGTH_LONG).show();
+                            }
+
+                        } catch (JSONException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                            Toast.makeText(LoginActivity2.this,
+                                    "connected but not working",
+                                    Toast.LENGTH_LONG).show();
+
+                        }
+						/*try {
+
+							}
+						/*else {
+								Toast.makeText(MainActivity.this,
+										response.getString("message"),
+										Toast.LENGTH_LONG).show();
+							}
+						 catch (JSONException e) {
+							Log.d("checking", e.toString());
+							Toast.makeText(MainActivity.this, e.toString(),
+									Toast.LENGTH_LONG).show();
+
+						}*/
+//						pDialog.hide();
+//						load_to_view();
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("ddddd", "Error: " + error.getMessage());
+                Toast.makeText(LoginActivity2.this, error.toString(),
+                        Toast.LENGTH_LONG).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("myqueery", "9");
+                params.put("email",  mEmailView.getText().toString());
+                params.put("password", mPasswordView.getText().toString());
+				//params.put("password","no/or");
+                //params.put("email","umairmindfreak");
+                //params.put("password","1234");
+
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_activity2);
 
-        if(UserService.getInstance(this).getCurrentUser()!=null)
+        /*if(UserService.getInstance(this).getCurrentUser()!=null)
         {
             goToMainMenuActivity();
             return;
         }
+*/
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -82,15 +172,15 @@ public class LoginActivity2 extends Activity {
             rememberMeCheckBox.setChecked(true);
             String username = sharedPreferences.getString("username", null);
             String password = sharedPreferences.getString("password", null);
-            login(username,password);
+            //login(username,password);
         }
     }
 
-    private void login(String username,String password)
+   /* private void login(String username,String password)
     {
         progressDialog.show();
         UserService.getInstance(LoginActivity2.this).login(username, password, loginListener);
-    }
+    }*/
 
     private void goToSignupActivity()
     {
@@ -108,10 +198,10 @@ public class LoginActivity2 extends Activity {
     View.OnClickListener onClickLoginButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            String username = mEmailView.getText().toString();
-            String password = mPasswordView.getText().toString();
+           String username = mEmailView.getText().toString();
+           String password = mPasswordView.getText().toString();
 
-            login(username, password);
+            vollry();
         }
     };
 

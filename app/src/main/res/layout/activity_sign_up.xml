@@ -28,10 +28,10 @@
             android:layout_height="wrap_content"
             android:text="SIGN UP"
             android:id="@+id/btn_signup"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
             android:background="#ff6797c4"
-            android:textColor="@color/background_material_light" />
+            android:textColor="@color/background_material_light"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
     <EditText
